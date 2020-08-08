@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitClient {
+object RetrofitClient {
 
     private val baseUrl="https://api.themoviedb.org/"
     private val httpClientBuilder= OkHttpClient.Builder().build()
