@@ -5,4 +5,7 @@
     <string name="overview">Overview: </string>
     <string name="rating">Rating:</string>
     <string name="release_date">Release date:</string>
+    <string name="genres">Genres:</string>
+    <string name="language">Language:</string>
+    <string name="quote">Quote:</string>
 </resources>

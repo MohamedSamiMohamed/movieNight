@@ -1,12 +1,9 @@
 package com.example.movienight.ui
 
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movienight.R
 import com.example.movienight.models.movies.Movies
 import com.example.movienight.models.movies.Result
 import com.example.movienight.repository.ApiEndPoints

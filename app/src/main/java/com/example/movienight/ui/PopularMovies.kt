@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +64,7 @@ class PopularMovies : Fragment() ,MoviesAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         val args=Bundle()
         moviesViewModel.getMovies().value?.get(position)?.id?.let { args.putInt("movie_id", it) }
-        val movieDetails=MovieDetails.newInstance()
+        val movieDetails=MovieDetailsFragment.newInstance()
         movieDetails.arguments=args
         (activity as MainActivity).replaceFragment(movieDetails,"movie_details")
         //Toast.makeText(activity, "item ${position} is clicked", Toast.LENGTH_SHORT).show()
