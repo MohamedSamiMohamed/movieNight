@@ -12,13 +12,8 @@
         android:visibility="visible"
         tools:listitem="@layout/movie_item"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AAAAAAAAAAAAAAAA"
-        android:textColor="@color/white"
-        />
-<!--    <androidx.core.widget.ContentLoadingProgressBar
+
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/movies_list_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,5 +23,4 @@
         />
 
 
--->
 </RelativeLayout>

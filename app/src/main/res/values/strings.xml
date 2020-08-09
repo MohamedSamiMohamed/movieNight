@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">movie night</string>
     <string name="movie_title">Title</string>
+    <string name="category">Category: </string>
+    <string name="overview">Overview: </string>
+    <string name="rating">Rating:</string>
+    <string name="release_date">Release date:</string>
 </resources>

@@ -31,7 +31,7 @@ class PopularMovies : Fragment() {
     ): View? {
         val view: View= inflater.inflate(R.layout.popular_movies_fragment, container, false)
         moviesRv=view.findViewById<RecyclerView>(R.id.movie_list_rv)
-        //moviesProgressbar=view.findViewById(R.id.movies_list_progress_bar)
+        moviesProgressbar=view.findViewById(R.id.movies_list_progress_bar)
         return view
     }
 
