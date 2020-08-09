@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.R
 import com.example.movienight.models.movies.Result
 
-class PopularMovies : Fragment() {
+class PopularMovies : Fragment() ,MoviesAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance() = PopularMovies()
@@ -59,10 +59,21 @@ class PopularMovies : Fragment() {
             }
         })
 
+
     }
+
+    override fun onItemClick(position: Int) {
+        val args=Bundle()
+        moviesViewModel.getMovies().value?.get(position)?.id?.let { args.putInt("movie_id", it) }
+        val movieDetails=MovieDetails.newInstance()
+        movieDetails.arguments=args
+        (activity as MainActivity).replaceFragment(movieDetails,"movie_details")
+        //Toast.makeText(activity, "item ${position} is clicked", Toast.LENGTH_SHORT).show()
+    }
+
     private fun initRecyclerView(){
         moviesRv.layoutManager=LinearLayoutManager(this.activity)
-        moviesAdapter= MoviesAdapter()
+        moviesAdapter= MoviesAdapter(this)
         moviesViewModel.getMovies().value?.let { moviesAdapter.setMoviesList(it) }
         Log.d("data",moviesViewModel.getMovies().value.toString())
         moviesRv.adapter=moviesAdapter
