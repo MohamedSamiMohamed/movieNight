@@ -48,13 +48,13 @@ class PopularMovies : Fragment() {
 
         moviesViewModel.getIsLoading().observe(viewLifecycleOwner,object :Observer<Boolean>{
             override fun onChanged(t: Boolean?) {
-            if(equals(false)){
-                //moviesProgressbar.visibility=View.GONE
-                //moviesRv.visibility=View.VISIBLE
+            if(moviesViewModel.getIsLoading().value==false){
+                moviesProgressbar.visibility=View.GONE
+                moviesRv.visibility=View.VISIBLE
             }
                 else{
-                //moviesProgressbar.visibility=View.VISIBLE
-                //moviesRv.visibility=View.GONE
+                moviesProgressbar.visibility=View.VISIBLE
+                moviesRv.visibility=View.GONE
             }
             }
         })
