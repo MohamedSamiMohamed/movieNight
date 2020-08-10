@@ -12,7 +12,7 @@ import com.example.movienight.R
 import com.example.movienight.models.movies.Result
 import kotlinx.android.synthetic.main.popular_movies_fragment.*
 
-class PopularMoviesFragment : Fragment() ,MoviesAdapter.OnItemClickListener {
+class PopularMoviesFragment : BaseFragment() , MoviesAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance() = PopularMoviesFragment()
@@ -20,15 +20,11 @@ class PopularMoviesFragment : Fragment() ,MoviesAdapter.OnItemClickListener {
     private lateinit var moviesViewModel: PopularMoviesViewModel
     private lateinit var moviesAdapter:MoviesAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view: View= inflater.inflate(R.layout.popular_movies_fragment, container, false)
-        return view
+    override fun layoutID(): Int {
+        return R.layout.popular_movies_fragment
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         moviesViewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel::class.java)

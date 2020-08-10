@@ -13,7 +13,7 @@ import com.example.movienight.models.movieDetails.MovieDetails
 import kotlinx.android.synthetic.main.movie_details_fragment.*
 import kotlin.properties.Delegates
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = MovieDetailsFragment()
@@ -22,14 +22,7 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var movieDetailsViewModel: MovieDetailsViewModel
     private lateinit var movieDetails:MovieDetails
     private var movieID by Delegates.notNull<Int>()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-         val view:View= inflater.inflate(R.layout.movie_details_fragment, container, false)
-         movieID= arguments?.getInt("movie_id")!!
-         return view
-    }
+
     fun updateUI(movieDetails: MovieDetails) {
         movie_title_middle.setText(movieDetails.title)
         var genresText=movieDetails.genres[0].name
@@ -49,8 +42,14 @@ class MovieDetailsFragment : Fragment() {
             .load("https://image.tmdb.org/t/p/original" + movieDetails.backdropPath)
             .into(movie_image)
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+
+    override fun layoutID(): Int {
+        return R.layout.movie_details_fragment
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        movieID= arguments?.getInt("movie_id")!!
         movieDetailsViewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
         movieDetailsViewModel.setID(movieID)
         movieDetailsViewModel.requsetMovieDetails()
