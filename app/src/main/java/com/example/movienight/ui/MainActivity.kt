@@ -1,16 +1,19 @@
 package com.example.movienight.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.movienight.R
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    override fun layoutID(): Int {
+        return R.layout.activity_main
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().add(R.id.root_layout,PopularMovies.newInstance(),"popular_movies")
+        supportFragmentManager.beginTransaction().add(R.id.root_layout,PopularMoviesFragment.newInstance(),"popular_movies")
             .commit()
     }
 
