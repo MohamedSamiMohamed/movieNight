@@ -1,13 +1,10 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.movieDetails
 
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movienight.models.movieDetails.MovieDetails
-import com.example.movienight.models.movies.Movies
-import com.example.movienight.models.movies.Result
 import com.example.movienight.repository.ApiEndPoints
 import com.example.movienight.repository.RetrofitClient
 import retrofit2.Call

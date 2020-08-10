@@ -1,4 +1,4 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.utilities
 
 import android.os.Bundle
 import android.view.LayoutInflater

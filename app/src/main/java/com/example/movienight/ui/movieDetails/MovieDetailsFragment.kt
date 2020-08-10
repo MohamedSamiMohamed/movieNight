@@ -1,22 +1,21 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.movieDetails
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.movienight.R
 import com.example.movienight.models.movieDetails.MovieDetails
+import com.example.movienight.ui.utilities.BaseFragment
 import kotlinx.android.synthetic.main.movie_details_fragment.*
 import kotlin.properties.Delegates
 
 class MovieDetailsFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = MovieDetailsFragment()
+        fun newInstance() =
+            MovieDetailsFragment()
     }
 
     private lateinit var movieDetailsViewModel: MovieDetailsViewModel
@@ -67,7 +66,5 @@ class MovieDetailsFragment : BaseFragment() {
 
 
     }
-
-
 
 }

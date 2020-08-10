@@ -1,4 +1,4 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.popularMovies
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -16,6 +16,7 @@ class PopularMoviesViewModel : ViewModel() {
     val movieListLive=MutableLiveData<List<Result>>()
     val isLoading=MutableLiveData<Boolean>()
     val failed=MutableLiveData<Boolean>(false)
+
     fun requestMovies(){
         val request= RetrofitClient.getAPI(ApiEndPoints::class.java).getPopularMovies()
         request.enqueue(object : Callback<Movies> {
@@ -35,9 +36,11 @@ class PopularMoviesViewModel : ViewModel() {
             }
         })
     }
+
     fun getMovies():LiveData<List<Result>>{
         return movieListLive
     }
+
     fun getIsLoading():LiveData<Boolean>{
         return  isLoading
     }
