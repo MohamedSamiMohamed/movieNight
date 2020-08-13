@@ -14,7 +14,7 @@
         android:visibility="visible"
         />
     <com.google.android.material.appbar.AppBarLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id = "@+id/app_bar"
         android:layout_width = "match_parent"
         android:layout_height = "300dp"
@@ -60,7 +60,7 @@
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_movie_details"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width = "match_parent"
         android:layout_height = "match_parent"
         android:background = "@color/white"
