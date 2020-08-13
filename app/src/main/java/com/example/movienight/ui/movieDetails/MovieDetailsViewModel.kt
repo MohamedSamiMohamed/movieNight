@@ -17,7 +17,6 @@ class MovieDetailsViewModel() : ViewModel() {
     private val failed= MutableLiveData<Boolean>(false)
     private val movieDetailsLive=MutableLiveData<MovieDetails>()
 
-
     //method to get movieDetails
     fun requsetMovieDetails(){
         viewModelScope.launch {

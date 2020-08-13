@@ -1,10 +1,11 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.movienight.R
+import com.example.movienight.ui.MainActivity
 import com.example.movienight.ui.utilities.BaseActivity
 
 class SplashActivity : BaseActivity() {

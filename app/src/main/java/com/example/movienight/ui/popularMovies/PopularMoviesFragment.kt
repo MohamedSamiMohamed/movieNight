@@ -10,6 +10,7 @@ import com.example.movienight.models.movies.Result
 import com.example.movienight.ui.utilities.BaseFragment
 import com.example.movienight.ui.MainActivity
 import com.example.movienight.ui.movieDetails.MovieDetailsFragment
+import com.example.movienight.ui.utilities.Constants
 import kotlinx.android.synthetic.main.popular_movies_fragment.*
 
 class PopularMoviesFragment : BaseFragment() ,
@@ -62,7 +63,7 @@ class PopularMoviesFragment : BaseFragment() ,
 
     override fun onItemClick(position: Int) {
         val args=Bundle()
-        moviesViewModel.getMovies().value?.get(position)?.id?.let { args.putInt("movie_id", it) }
+        moviesViewModel.getMovies().value?.get(position)?.id?.let { args.putInt(Constants.MOVIE_ID, it) }
         val movieDetails=
             MovieDetailsFragment.newInstance()
         movieDetails.arguments=args

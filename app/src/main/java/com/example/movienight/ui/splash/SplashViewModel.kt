@@ -1,4 +1,4 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.splash
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -8,6 +8,7 @@ import android.os.Handler;
 
 class SplashViewModel() : ViewModel() {
     val timeOut = MutableLiveData<Boolean>(false)
+
     fun startDelay() {
         val handler = Handler()
         handler.postDelayed(Runnable {

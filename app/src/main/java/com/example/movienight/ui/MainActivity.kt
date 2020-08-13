@@ -6,9 +6,9 @@ import com.example.movienight.R
 import com.example.movienight.ui.popularMovies.PopularMoviesFragment
 import com.example.movienight.ui.utilities.BaseActivity
 
-
 class MainActivity : BaseActivity() {
 
+    lateinit var  mainViewModel:MainViewModel
     override fun layoutID(): Int {
         return R.layout.activity_main
     }

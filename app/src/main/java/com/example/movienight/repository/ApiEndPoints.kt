@@ -1,12 +1,16 @@
 package com.example.movienight.repository
 
+import androidx.core.content.res.TypedArrayUtils.getString
+import com.example.movienight.R
 import com.example.movienight.models.movieDetails.MovieDetails
 import com.example.movienight.models.movies.Movies
+import com.example.movienight.ui.utilities.Constants
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-const val API_KEY="11fab629496b64e02580a61604b7a093"
+const val API_KEY=Constants.API_KEY
+
 interface ApiEndPoints {
     /**
      *this method to get popular movies info
