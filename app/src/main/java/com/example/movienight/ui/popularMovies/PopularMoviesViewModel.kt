@@ -9,17 +9,16 @@ import com.example.movienight.models.movies.Movies
 import com.example.movienight.models.movies.Result
 import com.example.movienight.repository.ApiEndPoints
 import com.example.movienight.repository.RetrofitClient
+import com.example.movienight.ui.utilities.BaseViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PopularMoviesViewModel : ViewModel() {
-    private val movieListLive=MutableLiveData<List<Result>>()
-    private val isLoading=MutableLiveData<Boolean>()
+class PopularMoviesViewModel : BaseViewModel() {
+    val movieListLive=MutableLiveData<List<Result>>()
     private val failed=MutableLiveData<Boolean>(false)
-
     fun requestMovies(){
 
         viewModelScope.launch(IO) {
@@ -43,11 +42,5 @@ class PopularMoviesViewModel : ViewModel() {
         return movieListLive
     }
 
-    fun getIsLoading():LiveData<Boolean>{
-        return  isLoading
-    }
-    fun isFailed():LiveData<Boolean>{
-        return  failed
-    }
 
 }

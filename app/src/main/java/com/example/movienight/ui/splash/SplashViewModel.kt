@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.os.Handler;
+import com.example.movienight.ui.utilities.BaseViewModel
 
-class SplashViewModel() : ViewModel() {
+class SplashViewModel() : BaseViewModel() {
     val timeOut = MutableLiveData<Boolean>(false)
 
     fun startDelay() {

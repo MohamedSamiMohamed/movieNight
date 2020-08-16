@@ -1,6 +1,5 @@
 package com.example.movienight.ui.movieDetails
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -8,18 +7,17 @@ import com.bumptech.glide.Glide
 import com.example.movienight.R
 import com.example.movienight.models.movieDetails.MovieDetails
 import com.example.movienight.ui.utilities.BaseFragment
+import com.example.movienight.ui.utilities.Constants
 import kotlinx.android.synthetic.main.movie_details_fragment.*
 import kotlin.properties.Delegates
 
-class MovieDetailsFragment : BaseFragment() {
+class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
 
     companion object {
         fun newInstance() =
             MovieDetailsFragment()
     }
 
-    private lateinit var movieDetailsViewModel: MovieDetailsViewModel
-    private lateinit var movieDetails:MovieDetails
     private var movieID by Delegates.notNull<Int>()
 
     fun updateUI(movieDetails: MovieDetails) {
@@ -38,7 +36,7 @@ class MovieDetailsFragment : BaseFragment() {
         rating_text.setText(movieDetails.voteAverage.toString())
         language_text.setText(movieDetails.spokenLanguages[0].name)
         Glide.with(this)
-            .load("https://image.tmdb.org/t/p/original" + movieDetails.backdropPath)
+            .load(Constants.IMAGE_URL + movieDetails.backdropPath)
             .into(movie_image)
     }
 
@@ -48,22 +46,20 @@ class MovieDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        movieID= arguments?.getInt("movie_id")!!
-        movieDetailsViewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
-        movieDetailsViewModel.setID(movieID)
-        movieDetailsViewModel.requsetMovieDetails()
-        movieDetailsViewModel.getMovieDetails().observe(viewLifecycleOwner,object:Observer<MovieDetails>{
-            override fun onChanged(t: MovieDetails?) {
-                if(movieDetailsViewModel.getIsLoading().value==false){
-                    movieDetails= movieDetailsViewModel.getMovieDetails().value!!
-                    progress_bar_movie_details.visibility=View.GONE
-                    nested_scroll_movie_details.visibility=View.VISIBLE
-                    app_bar.visibility=View.VISIBLE
-                    updateUI(movieDetails)
-                }
+        movieID= arguments?.getInt(Constants.MOVIE_ID)!!
+        mViewModel.setID(movieID)
+        mViewModel.requsetMovieDetails()
+        mViewModel.movieDetailsLive.observe(viewLifecycleOwner,Observer<MovieDetails>{
+            if(!mViewModel.isLoading.value!!) {
+                nested_scroll_movie_details.visibility=View.VISIBLE
+                app_bar.visibility=View.VISIBLE
+                updateUI(it)
             }
         })
+    }
 
+    override fun getViewModel(): MovieDetailsViewModel {
+        return MovieDetailsViewModel()
     }
 
 }

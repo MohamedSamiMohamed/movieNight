@@ -9,18 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/movie_list_rv"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:listitem="@layout/movie_item"
         />
 
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/movies_list_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        style="?android:attr/progressBarStyle"
-        android:visibility="visible"
-        />
 
 
 </RelativeLayout>

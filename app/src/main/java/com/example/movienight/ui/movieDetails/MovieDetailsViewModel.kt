@@ -7,20 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.movienight.models.movieDetails.MovieDetails
 import com.example.movienight.repository.ApiEndPoints
 import com.example.movienight.repository.RetrofitClient
+import com.example.movienight.ui.utilities.BaseViewModel
 import kotlinx.coroutines.launch
 
 
-class MovieDetailsViewModel() : ViewModel() {
+class MovieDetailsViewModel() : BaseViewModel() {
     var movieID=MutableLiveData<Int>()
 
-    private val isLoading= MutableLiveData<Boolean>()
     private val failed= MutableLiveData<Boolean>(false)
-    private val movieDetailsLive=MutableLiveData<MovieDetails>()
+    val movieDetailsLive=MutableLiveData<MovieDetails>()
 
     //method to get movieDetails
     fun requsetMovieDetails(){
         viewModelScope.launch {
             try {
+                isLoading.postValue(true)
                 val response = movieID.value?.let {
                     RetrofitClient.getAPI(ApiEndPoints::class.java).getMovieDetails(
                         it
@@ -41,15 +42,6 @@ class MovieDetailsViewModel() : ViewModel() {
         }
 
 
-    fun getMovieDetails():LiveData<MovieDetails>{
-        return movieDetailsLive
-    }
-    fun getIsLoading():LiveData<Boolean>{
-        return  isLoading
-    }
-    fun isFailed():LiveData<Boolean>{
-        return  failed
-    }
     fun setID(movieId: Int){
         movieID.value=movieId
     }
