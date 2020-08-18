@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.movienight.R
 import com.example.movienight.models.movieDetails.MovieDetails
+import com.example.movienight.ui.uiModels.MovieDetailsUi
 import com.example.movienight.ui.utilities.BaseFragment
 import com.example.movienight.ui.utilities.Constants
 import kotlinx.android.synthetic.main.movie_details_fragment.*
@@ -20,7 +21,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
 
     private var movieID by Delegates.notNull<Int>()
 
-    fun updateUI(movieDetails: MovieDetails) {
+    fun updateUI(movieDetails: MovieDetailsUi) {
         movie_title_middle.setText(movieDetails.title)
         var genresText=movieDetails.genres[0].name
         for(i in (1..movieDetails.genres.size-1)){
@@ -45,21 +46,21 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
         movieID= arguments?.getInt(Constants.MOVIE_ID)!!
         mViewModel.setID(movieID)
-        mViewModel.requsetMovieDetails()
-        mViewModel.movieDetailsLive.observe(viewLifecycleOwner,Observer<MovieDetails>{
-            if(!mViewModel.isLoading.value!!) {
+        mViewModel.requestMovieDetails()
+        mViewModel.movieDetailsUI.observe(viewLifecycleOwner,Observer<MovieDetailsUi>{
                 nested_scroll_movie_details.visibility=View.VISIBLE
                 app_bar.visibility=View.VISIBLE
                 updateUI(it)
-            }
         })
     }
 
     override fun getViewModel(): MovieDetailsViewModel {
         return MovieDetailsViewModel()
     }
+
+
 
 }

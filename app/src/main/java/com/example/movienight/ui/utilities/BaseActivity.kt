@@ -1,6 +1,7 @@
 package com.example.movienight.ui.utilities
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -8,7 +9,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.example.movienight.R
 
-abstract class BaseActivity<T:BaseViewModel>:AppCompatActivity() {
+abstract class BaseActivity<T:BaseViewModel<*>>:AppCompatActivity() {
 
     abstract fun layoutID():Int
     abstract fun getViewModel():T
@@ -26,10 +27,16 @@ abstract class BaseActivity<T:BaseViewModel>:AppCompatActivity() {
         mViewModel.isLoading.observe(this, Observer {
             showLoadingDialog(it)
         })
+        mViewModel.mRepo.requestErrorMessage.observe(this, Observer {
+            showLoadingDialog(false)
+            showToast(it)
+        })
+    }
+    private fun showToast(errMessage: String) {
+        Toast.makeText(this, errMessage, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoadingDialog(show: Boolean) {
-        Log.d("show Loading?",show.toString())
         dialog.setCanceledOnTouchOutside(false)
         if (show) {
             dialog.show()

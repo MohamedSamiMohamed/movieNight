@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movienight.R
 import com.example.movienight.models.movies.Result
+import com.example.movienight.ui.uiModels.PopularMovieUi
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -34,7 +35,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
         }
 
 
-        fun bindData(movieData: Result) {
+        fun bindData(movieData: PopularMovieUi) {
             movieTitle.setText(movieData.title)
             movieDate.setText(movieData.releaseDate)
             movieOverView.setText(movieData.overview)
@@ -54,7 +55,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
 
     }
 
-    var popularMovies: List<Result> = ArrayList()
+    var popularMovies: MutableList<PopularMovieUi> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(
@@ -73,7 +74,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
         }
     }
 
-    fun setMoviesList(popularMoviesList: List<Result>) {
+    fun setMoviesList(popularMoviesList: MutableList<PopularMovieUi>) {
         popularMovies = popularMoviesList
 
     }

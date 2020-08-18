@@ -2,48 +2,45 @@ package com.example.movienight.ui.movieDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.Transformations
 import com.example.movienight.models.movieDetails.MovieDetails
-import com.example.movienight.repository.ApiEndPoints
-import com.example.movienight.repository.RetrofitClient
+import com.example.movienight.repository.MovieDetailsRepo
+import com.example.movienight.ui.uiModels.MovieDetailsUi
 import com.example.movienight.ui.utilities.BaseViewModel
-import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 
-class MovieDetailsViewModel() : BaseViewModel() {
-    var movieID=MutableLiveData<Int>()
+class MovieDetailsViewModel() : BaseViewModel<MovieDetailsRepo>() {
 
-    private val failed= MutableLiveData<Boolean>(false)
-    val movieDetailsLive=MutableLiveData<MovieDetails>()
+    var movieID by Delegates.notNull<Int>()
+    lateinit var movieDetailsLive : LiveData<MovieDetails>
+    lateinit var movieDetailsUI: LiveData<MovieDetailsUi>
 
-    //method to get movieDetails
-    fun requsetMovieDetails(){
-        viewModelScope.launch {
-            try {
-                isLoading.postValue(true)
-                val response = movieID.value?.let {
-                    RetrofitClient.getAPI(ApiEndPoints::class.java).getMovieDetails(
-                        it
-                    )
-                }
-                if (response?.isSuccessful!!) {
-                    isLoading.postValue(false)
-                    movieDetailsLive.postValue(response.body())
-                } else {
-                    isLoading.postValue(true)
-                }
-
-            }
-            catch (err:Throwable){
-                failed.postValue(true)
-            }
-        }
+    fun requestMovieDetails() {
+        isLoading.value = true
+        movieDetailsLive = mRepo.requestMovieDetails(movieID)
+        movieDetailsUI=Transformations.switchMap(movieDetailsLive){
+            val movieDetailsUiObject=MovieDetailsUi()
+            movieDetailsUiObject.spokenLanguages=it.spokenLanguages
+            movieDetailsUiObject.backdropPath=it.backdropPath
+            movieDetailsUiObject.genres=it.genres
+            movieDetailsUiObject.overview=it.overview
+            movieDetailsUiObject.title=it.title
+            movieDetailsUiObject.releaseDate=it.releaseDate
+            movieDetailsUiObject.voteAverage=it.voteAverage
+            movieDetailsUiObject.tagline=it.tagline
+            isLoading.value=false
+            MutableLiveData(movieDetailsUiObject)
         }
 
+    }
 
-    fun setID(movieId: Int){
-        movieID.value=movieId
+    fun setID(movieId: Int) {
+        movieID = movieId
+    }
+
+    override fun getRepo(): MovieDetailsRepo {
+        return MovieDetailsRepo()
     }
 }
 
