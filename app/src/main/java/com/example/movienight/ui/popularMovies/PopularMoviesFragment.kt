@@ -37,7 +37,7 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
 
         mViewModel.requestMovies()
         mViewModel.movieListUI.observe(viewLifecycleOwner,
-            Observer<MutableList<PopularMovieUi>> {
+            Observer<List<PopularMovieUi>> {
                 moviesAdapter.setMoviesList(it)
                 moviesAdapter.notifyDataSetChanged()
             })

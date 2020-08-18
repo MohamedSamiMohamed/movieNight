@@ -11,25 +11,24 @@ import kotlinx.coroutines.launch
 
 class PopularMoviesViewModel : BaseViewModel<PopularMoviesRepo>() {
     lateinit var movieListLive: LiveData<List<Result>>
-    lateinit var movieListUI: LiveData<ArrayList<PopularMovieUi>>
+    lateinit var movieListUI: LiveData<List<PopularMovieUi>>
 
     fun requestMovies() {
         isLoading.value = true
-        movieListLive=mRepo.requestMovies()
-        movieListUI=Transformations.switchMap(movieListLive){
-            val popularMovies=ArrayList<PopularMovieUi>()
-
-            for(i in 0..it.size-1){
-                val popularMovieUiObject=PopularMovieUi()
-                popularMovieUiObject.releaseDate=it[i].releaseDate
-                popularMovieUiObject.title= it[i].title
-                popularMovieUiObject.adult=it[i].adult
-                popularMovieUiObject.posterPath=it[i].posterPath
-                popularMovieUiObject.voteAverage=it[i].voteAverage
-                popularMovieUiObject.overview=it[i].overview
-                popularMovies.add(popularMovieUiObject)
+        movieListLive = mRepo.requestMovies()
+        movieListUI = Transformations.switchMap(movieListLive) {
+            lateinit var popularMovies: List<PopularMovieUi>
+            popularMovies = it.map {
+                val popularMovieUiObject = PopularMovieUi()
+                popularMovieUiObject.releaseDate = it.releaseDate
+                popularMovieUiObject.title = it.title
+                popularMovieUiObject.adult = it.adult
+                popularMovieUiObject.posterPath = it.posterPath
+                popularMovieUiObject.voteAverage = it.voteAverage
+                popularMovieUiObject.overview = it.overview
+                popularMovieUiObject
             }
-            isLoading.value=false
+            isLoading.value = false
             MutableLiveData(popularMovies)
         }
 

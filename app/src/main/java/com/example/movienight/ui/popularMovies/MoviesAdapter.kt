@@ -55,7 +55,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
 
     }
 
-    var popularMovies: MutableList<PopularMovieUi> = ArrayList()
+    var popularMovies: List<PopularMovieUi> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(
@@ -74,7 +74,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
         }
     }
 
-    fun setMoviesList(popularMoviesList: MutableList<PopularMovieUi>) {
+    fun setMoviesList(popularMoviesList: List<PopularMovieUi>) {
         popularMovies = popularMoviesList
 
     }
