@@ -1,4 +1,4 @@
-package com.example.movienight.ui.popularMovies
+package com.example.movienight.ui.popularMovies.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movienight.R
-import com.example.movienight.models.movies.Result
-import com.example.movienight.ui.uiModels.PopularMovieUi
+import com.example.movienight.ui.popularMovies.model.PopularMovieUi
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    inner class MoviesViewHolder (itemView: View) :
+    inner class MoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private val movieImage: ImageView = itemView.movie_image
         private val movieTitle: TextView = itemView.movie_title
@@ -30,7 +30,7 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
 
 
         override fun onClick(v: View?) {
-            val position =adapterPosition
+            val position = adapterPosition
             clickListener.onItemClick(position)
         }
 
@@ -59,7 +59,8 @@ class MoviesAdapter(private val clickListener: OnItemClickListener) : RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false))
+            LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.movienight.ui.utilities
+package com.example.movienight.ui.base
 
 import androidx.lifecycle.MutableLiveData
 

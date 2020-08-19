@@ -1,11 +1,8 @@
 package com.example.movienight.repository
 
-import androidx.core.content.res.TypedArrayUtils.getString
-import com.example.movienight.R
 import com.example.movienight.models.movieDetails.MovieDetails
 import com.example.movienight.models.movies.Movies
-import com.example.movienight.ui.utilities.Constants
-import retrofit2.Call
+import com.example.movienight.ui.base.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

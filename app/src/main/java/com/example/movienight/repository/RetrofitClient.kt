@@ -1,6 +1,6 @@
 package com.example.movienight.repository
 
-import com.example.movienight.ui.utilities.Constants
+import com.example.movienight.ui.base.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
