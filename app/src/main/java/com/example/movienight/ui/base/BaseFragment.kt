@@ -24,7 +24,7 @@ abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
     ): View? {
 
         val view: View = inflater.inflate(layoutID(), container, false)
-        dialog = MaterialDialog(context!!).noAutoDismiss()
+        dialog = MaterialDialog(requireContext()).noAutoDismiss()
             .customView(R.layout.loading_dialog)
         mViewModel = ViewModelProviders
             .of(this)
@@ -32,16 +32,14 @@ abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
         mViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             showLoadingDialog(it)
         })
-        return view
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         mViewModel.mRepo.requestErrorMessage.observe(viewLifecycleOwner, Observer {
             showLoadingDialog(false)
             showToast(it)
         })
+        return view
     }
+
 
     private fun showToast(errMessage: String) {
         Toast.makeText(context, errMessage, Toast.LENGTH_SHORT).show()

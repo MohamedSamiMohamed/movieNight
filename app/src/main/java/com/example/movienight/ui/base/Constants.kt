@@ -5,6 +5,4 @@ object Constants {
     const val BASE_URL = "https://api.themoviedb.org/"
     const val MOVIE_ID = "movie_id"
     const val IMAGE_URL = "https://image.tmdb.org/t/p/original"
-    const val POPULAR_MOVIES_TAG = "popular_movies"
-    const val MOVIE_DETAILS_TAG = "movie_details"
 }
