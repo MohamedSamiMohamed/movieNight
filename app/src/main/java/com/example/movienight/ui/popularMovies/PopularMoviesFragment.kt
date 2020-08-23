@@ -2,6 +2,7 @@ package com.example.movienight.ui.popularMovies
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -12,6 +13,7 @@ import com.example.movienight.ui.MainActivity
 import com.example.movienight.ui.movieDetails.MovieDetailsFragment
 import com.example.movienight.ui.popularMovies.adapter.PopularMoviesAdapter
 import com.example.movienight.ui.base.Constants
+import com.example.movienight.ui.movieDetails.MovieDetailsFragmentArgs
 import kotlinx.android.synthetic.main.popular_movies_fragment.*
 
 class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
@@ -45,8 +47,7 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
     }
 
     override fun onItemClick(position: Int) {
-        val args = Bundle()
-        mViewModel.movieListUI.value?.get(position)?.id?.let { args.putInt(Constants.MOVIE_ID, it) }
+        val args = bundleOf(Constants.MOVIE_ID to mViewModel.movieListUI.value?.get(position)?.id)
         navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment,args)
     }
 
