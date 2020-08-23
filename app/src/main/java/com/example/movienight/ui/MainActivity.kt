@@ -1,6 +1,8 @@
 package com.example.movienight.ui
 
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.movienight.R
 import com.example.movienight.ui.movieDetails.MovieDetailsFragment
 import com.example.movienight.ui.popularMovies.PopularMoviesFragment
@@ -16,14 +18,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.isLoading.postValue(false)
-        supportFragmentManager.beginTransaction().add(R.id.root_layout,
-            PopularMoviesFragment.newInstance(),Constants.POPULAR_MOVIES_TAG)
-            .commit()
-    }
-
-    fun replaceFragment(fragment: MovieDetailsFragment, tag: String) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.root_layout, fragment, tag).addToBackStack("").commit()
     }
 
     override fun getViewModel(): MainViewModel {

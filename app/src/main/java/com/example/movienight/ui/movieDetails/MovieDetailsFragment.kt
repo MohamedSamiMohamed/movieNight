@@ -18,7 +18,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
             MovieDetailsFragment()
     }
 
-    private var movieID by Delegates.notNull<Int>()
+    private var movieID:Int?=null
 
     fun updateUI(movieDetails: MovieDetailsUi) {
         movie_title_middle.setText(movieDetails.title)

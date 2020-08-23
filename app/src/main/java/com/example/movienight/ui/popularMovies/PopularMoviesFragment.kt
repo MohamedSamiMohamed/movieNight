@@ -3,6 +3,8 @@ package com.example.movienight.ui.popularMovies
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.R
 import com.example.movienight.ui.base.BaseFragment
@@ -21,13 +23,14 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
     }
 
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
-
+    private lateinit var navController: NavController
     override fun layoutID(): Int {
         return R.layout.popular_movies_fragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController=Navigation.findNavController(view)
         movie_list_rv.layoutManager = LinearLayoutManager(this.activity)
         popularMoviesAdapter =
             PopularMoviesAdapter(this)
@@ -44,11 +47,7 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
     override fun onItemClick(position: Int) {
         val args = Bundle()
         mViewModel.movieListUI.value?.get(position)?.id?.let { args.putInt(Constants.MOVIE_ID, it) }
-        val movieDetails =
-            MovieDetailsFragment.newInstance()
-        //navigation UI
-        movieDetails.arguments = args
-        (activity as MainActivity).replaceFragment(movieDetails, Constants.MOVIE_DETAILS_TAG)
+        navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment,args)
     }
 
     override fun getViewModel(): PopularMoviesViewModel = PopularMoviesViewModel()
