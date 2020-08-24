@@ -32,7 +32,7 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController=Navigation.findNavController(view)
+        navController = Navigation.findNavController(view)
         movie_list_rv.layoutManager = LinearLayoutManager(this.activity)
         popularMoviesAdapter =
             PopularMoviesAdapter(this)
@@ -48,7 +48,7 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
 
     override fun onItemClick(position: Int) {
         val args = bundleOf(Constants.MOVIE_ID to mViewModel.movieListUI.value?.get(position)?.id)
-        navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment,args)
+        navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment, args)
     }
 
     override fun getViewModel(): PopularMoviesViewModel = PopularMoviesViewModel()

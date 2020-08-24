@@ -7,7 +7,7 @@ import com.example.movienight.ui.base.BaseViewModel
 
 
 class PopularMoviesViewModel : BaseViewModel<PopularMoviesRepo>() {
-    lateinit var movieListUI: LiveData<List<PopularMovieUi>>
+    var movieListUI: LiveData<List<PopularMovieUi>> = MutableLiveData()
 
     fun requestMovies() {
         isLoading.value = true

@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.example.movienight.R
 
 abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
+    
     protected lateinit var mViewModel: T
     abstract fun getViewModel(): T
     abstract fun layoutID(): Int
@@ -26,6 +27,11 @@ abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
         val view: View = inflater.inflate(layoutID(), container, false)
         dialog = MaterialDialog(requireContext()).noAutoDismiss()
             .customView(R.layout.loading_dialog)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProviders
             .of(this)
             .get(getViewModel()::class.java)
@@ -37,9 +43,7 @@ abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
             showLoadingDialog(false)
             showToast(it)
         })
-        return view
     }
-
 
     private fun showToast(errMessage: String) {
         Toast.makeText(context, errMessage, Toast.LENGTH_SHORT).show()

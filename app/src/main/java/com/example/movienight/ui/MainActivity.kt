@@ -17,7 +17,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel.isLoading.postValue(false)
     }
 
     override fun getViewModel(): MainViewModel {

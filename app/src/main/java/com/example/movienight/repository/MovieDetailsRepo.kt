@@ -9,15 +9,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MovieDetailsRepo : BaseRepo() {
-    private val _movieDetailsLive = MutableLiveData<MovieDetails>()
 
     fun requestMovieDetails(movieID: Int): LiveData<MovieDetails> {
+        val movieDetailsLive = MutableLiveData<MovieDetails>()
         GlobalScope.launch(Main) {
             try {
                 val response =
                     RetrofitClient.getAPI(ApiEndPoints::class.java).getMovieDetails(movieID)
                 if (response.isSuccessful) {
-                    _movieDetailsLive.value = response.body()
+                    movieDetailsLive.value = response.body()
                 } else {
                     requestErrorMessage.value = response.errorBody().toString()
                 }
@@ -26,6 +26,6 @@ class MovieDetailsRepo : BaseRepo() {
 
             }
         }
-        return _movieDetailsLive
+        return movieDetailsLive
     }
 }

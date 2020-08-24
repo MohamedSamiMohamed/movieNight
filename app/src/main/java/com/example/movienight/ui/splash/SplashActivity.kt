@@ -14,7 +14,6 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel.isLoading.postValue(false)
         mViewModel.startDelay()
         mViewModel.endTime().observe(this, Observer {
             if (it) {

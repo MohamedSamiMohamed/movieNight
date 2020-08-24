@@ -1,4 +1,5 @@
 package com.example.movienight.repository
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,15 +9,15 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PopularMoviesRepo:BaseRepo() {
-    private val _popularMoviesResponse = MutableLiveData<List<Result>>()
+class PopularMoviesRepo : BaseRepo() {
 
-    fun requestMovies() :LiveData<List<Result>> {
+    fun requestMovies(): LiveData<List<Result>> {
+        val popularMoviesResponse = MutableLiveData<List<Result>>()
         GlobalScope.launch(Main) {
             try {
                 val response = RetrofitClient.getAPI(ApiEndPoints::class.java).getPopularMovies()
                 if (response.isSuccessful) {
-                    _popularMoviesResponse.value = response.body()?.results
+                    popularMoviesResponse.value = response.body()?.results
                 } else {
                     requestErrorMessage.value = response.errorBody().toString()
                 }
@@ -25,6 +26,6 @@ class PopularMoviesRepo:BaseRepo() {
                 requestErrorMessage.value = err.message.toString()
             }
         }
-        return _popularMoviesResponse
+        return popularMoviesResponse
     }
 }
