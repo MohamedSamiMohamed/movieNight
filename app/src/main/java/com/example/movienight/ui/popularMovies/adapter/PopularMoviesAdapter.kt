@@ -21,13 +21,6 @@ class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
     inner class MoviesViewHolder(var binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-
-        /*private val movieImage: ImageView = itemView.movie_image
-        private val movieTitle: TextView = itemView.movie_title
-        private val movieRating: TextView = itemView.rating_text
-        private val movieAdult: TextView = itemView.category_text
-        private val movieDate: TextView = itemView.date_text
-        private val movieOverView: TextView = itemView.overview_text*/
         init {
             itemView.setOnClickListener(this)
         }
@@ -39,20 +32,6 @@ class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
         }
 
         fun bindData(position: Int) {
-//            movieTitle.setText(movieData.title)
-//            movieDate.setText(movieData.releaseDate)
-//            movieOverView.setText(movieData.overview)
-//            movieRating.setText(movieData.voteAverage.toString())
-//            if (movieData.adult == true) {
-//                movieAdult.setText("watching under parents supervision!")
-//            } else {
-//                movieAdult.setText("family movie")
-//            }
-//            val requestOptions =
-//                RequestOptions().placeholder(R.mipmap.splash_icon).error(R.mipmap.splash_icon)
-//            Glide.with(itemView.context)
-//                .load("https://image.tmdb.org/t/p/original" + movieData.posterPath)
-//                .into(movieImage)
             binding.popularMovie = popularMovies[position]
         }
 

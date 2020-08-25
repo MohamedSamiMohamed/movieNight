@@ -6,7 +6,7 @@ import com.example.movienight.models.movieDetails.SpokenLanguage
 
 class MovieDetailsUi {
 
-    lateinit var genres: List<Genre>
+    lateinit var genres: List<String>
     lateinit var title: String
     lateinit var overview: String
     lateinit var releaseDate: String
@@ -21,7 +21,9 @@ class MovieDetailsUi {
                 MovieDetailsUi()
             movieDetailsUiObject.spokenLanguages = it.spokenLanguages
             movieDetailsUiObject.backdropPath = it.backdropPath
-            movieDetailsUiObject.genres = it.genres
+            movieDetailsUiObject.genres = it.genres.map {
+                it.name
+            }
             movieDetailsUiObject.overview = it.overview
             movieDetailsUiObject.title = it.title
             movieDetailsUiObject.releaseDate = it.releaseDate
