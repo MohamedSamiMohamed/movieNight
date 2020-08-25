@@ -5,7 +5,7 @@ import com.example.movienight.models.movieDetails.MovieDetails
 import com.example.movienight.models.movieDetails.SpokenLanguage
 
 class MovieDetailsUi {
-
+    var dataVisibility:Boolean=false
     lateinit var genres: List<String>
     lateinit var title: String
     lateinit var overview: String
@@ -19,6 +19,7 @@ class MovieDetailsUi {
         fun convertToUiModel(it: MovieDetails):MovieDetailsUi {
             val movieDetailsUiObject =
                 MovieDetailsUi()
+            movieDetailsUiObject.dataVisibility=true
             movieDetailsUiObject.spokenLanguages = it.spokenLanguages
             movieDetailsUiObject.backdropPath = it.backdropPath
             movieDetailsUiObject.genres = it.genres.map {

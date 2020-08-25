@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
 import com.example.movienight.R
 import com.example.movienight.databinding.MovieDetailsFragmentBinding
 import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
 import com.example.movienight.ui.base.BaseFragment
 import com.example.movienight.ui.base.Constants
-import kotlinx.android.synthetic.main.movie_details_fragment.*
-import kotlin.properties.Delegates
+
 
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
 
@@ -29,8 +27,6 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
         mViewModel.movieID = movieID
         mViewModel.requestMovieDetails()
         mViewModel.movieDetailsUI.observe(viewLifecycleOwner, Observer<MovieDetailsUi> {
-            binding.nestedScrollMovieDetails.visibility = View.VISIBLE
-            binding.appBar.visibility = View.VISIBLE
             binding.movieDetails=it
         })
     }
