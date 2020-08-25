@@ -3,11 +3,14 @@ package com.example.movienight.ui.popularMovies
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.R
+import com.example.movienight.databinding.PopularMoviesFragmentBinding
 import com.example.movienight.ui.base.BaseFragment
 import com.example.movienight.ui.MainActivity
 import com.example.movienight.ui.movieDetails.MovieDetailsFragment
@@ -32,12 +35,13 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val binding:PopularMoviesFragmentBinding=DataBindingUtil.setContentView(requireActivity(),R.layout.popular_movies_fragment)
+
         navController = Navigation.findNavController(view)
-        movie_list_rv.layoutManager = LinearLayoutManager(this.activity)
         popularMoviesAdapter =
             PopularMoviesAdapter(this)
-        movie_list_rv.adapter = popularMoviesAdapter
-
+        binding.adapter=popularMoviesAdapter
+        //movie_list_rv.adapter = popularMoviesAdapter
         mViewModel.requestMovies()
         mViewModel.movieListUI.observe(viewLifecycleOwner,
             Observer {

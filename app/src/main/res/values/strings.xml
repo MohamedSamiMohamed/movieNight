@@ -8,4 +8,6 @@
     <string name="genres">Genres:</string>
     <string name="language">Language:</string>
     <string name="quote">Quote:</string>
+    <string name="adult">watching under parents supervision!</string>
+    <string name="family">family movie</string>
 </resources>

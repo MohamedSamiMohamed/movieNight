@@ -8,14 +8,14 @@ class PopularMovieUi {
     lateinit var title: String
     lateinit var releaseDate: String
     lateinit var overview: String
-    var voteAverage by Delegates.notNull<Double>()
-    var adult by Delegates.notNull<Boolean>()
+    var voteAverage: Double? = null
+    var adult: Boolean? = null
     lateinit var posterPath: String
 
     companion object {
         fun convertToUiModel(it: Result): PopularMovieUi {
             val popularMovieUiObject = PopularMovieUi()
-            popularMovieUiObject.id=it.id
+            popularMovieUiObject.id = it.id
             popularMovieUiObject.releaseDate = it.releaseDate
             popularMovieUiObject.title = it.title
             popularMovieUiObject.adult = it.adult

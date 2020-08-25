@@ -9,21 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movienight.R
+import com.example.movienight.databinding.MovieItemBinding
 import com.example.movienight.ui.popularMovies.model.PopularMovieUi
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    inner class MoviesViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val movieImage: ImageView = itemView.movie_image
+    var popularMovies: List<PopularMovieUi> = ArrayList()
+
+    inner class MoviesViewHolder(var binding: MovieItemBinding) :
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+
+        /*private val movieImage: ImageView = itemView.movie_image
         private val movieTitle: TextView = itemView.movie_title
         private val movieRating: TextView = itemView.rating_text
         private val movieAdult: TextView = itemView.category_text
         private val movieDate: TextView = itemView.date_text
-        private val movieOverView: TextView = itemView.overview_text
-
+        private val movieOverView: TextView = itemView.overview_text*/
         init {
             itemView.setOnClickListener(this)
         }
@@ -34,33 +38,30 @@ class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
             clickListener.onItemClick(position)
         }
 
-
-        fun bindData(movieData: PopularMovieUi) {
-            movieTitle.setText(movieData.title)
-            movieDate.setText(movieData.releaseDate)
-            movieOverView.setText(movieData.overview)
-            movieRating.setText(movieData.voteAverage.toString())
-            if (movieData.adult == true) {
-                movieAdult.setText("watching under parents supervision!")
-            } else {
-                movieAdult.setText("family movie")
-            }
-            val requestOptions =
-                RequestOptions().placeholder(R.mipmap.splash_icon).error(R.mipmap.splash_icon)
-            Glide.with(itemView.context)
-                .load("https://image.tmdb.org/t/p/original" + movieData.posterPath)
-                .into(movieImage)
+        fun bindData(position: Int) {
+//            movieTitle.setText(movieData.title)
+//            movieDate.setText(movieData.releaseDate)
+//            movieOverView.setText(movieData.overview)
+//            movieRating.setText(movieData.voteAverage.toString())
+//            if (movieData.adult == true) {
+//                movieAdult.setText("watching under parents supervision!")
+//            } else {
+//                movieAdult.setText("family movie")
+//            }
+//            val requestOptions =
+//                RequestOptions().placeholder(R.mipmap.splash_icon).error(R.mipmap.splash_icon)
+//            Glide.with(itemView.context)
+//                .load("https://image.tmdb.org/t/p/original" + movieData.posterPath)
+//                .into(movieImage)
+            binding.popularMovie = popularMovies[position]
         }
-
 
     }
 
-    var popularMovies: List<PopularMovieUi> = ArrayList()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        return MoviesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-        )
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = MovieItemBinding.inflate(layoutInflater)
+        return MoviesViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -70,7 +71,7 @@ class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MoviesViewHolder -> {
-                holder.bindData(popularMovies.get(position))
+                holder.bindData(position)
             }
         }
     }

@@ -14,7 +14,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.example.movienight.R
 
 abstract class BaseFragment<T : BaseViewModel<*>> : Fragment() {
-    
+
     protected lateinit var mViewModel: T
     abstract fun getViewModel(): T
     abstract fun layoutID(): Int
