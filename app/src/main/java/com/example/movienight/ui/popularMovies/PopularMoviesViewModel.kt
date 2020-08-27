@@ -1,7 +1,7 @@
 package com.example.movienight.ui.popularMovies
 
 import androidx.lifecycle.*
-import com.example.movienight.repository.PopularMoviesRepo
+import com.example.movienight.data.repository.PopularMoviesRepo
 import com.example.movienight.ui.popularMovies.model.PopularMovieUi
 import com.example.movienight.ui.base.BaseViewModel
 

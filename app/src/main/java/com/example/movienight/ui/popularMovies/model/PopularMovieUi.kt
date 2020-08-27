@@ -1,7 +1,6 @@
 package com.example.movienight.ui.popularMovies.model
 
-import com.example.movienight.models.movies.Result
-import kotlin.properties.Delegates
+import com.example.movienight.models.popularMovies.Result
 
 class PopularMovieUi {
     var id: Int? = null

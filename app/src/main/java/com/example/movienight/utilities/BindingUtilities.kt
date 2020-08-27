@@ -1,11 +1,9 @@
-package com.example.movienight
+package com.example.movienight.utilities
 
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseMethod
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 

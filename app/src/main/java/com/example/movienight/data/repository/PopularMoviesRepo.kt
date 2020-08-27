@@ -1,10 +1,11 @@
-package com.example.movienight.repository
+package com.example.movienight.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.movienight.models.movies.Result
-import com.example.movienight.ui.base.BaseRepo
+import com.example.movienight.data.api.ApiEndPoints
+import com.example.movienight.models.popularMovies.Result
+import com.example.movienight.network.RetrofitClient
+import com.example.movienight.data.base.BaseRepo
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

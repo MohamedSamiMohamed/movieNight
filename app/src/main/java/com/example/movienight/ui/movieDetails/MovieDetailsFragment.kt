@@ -1,7 +1,6 @@
 package com.example.movienight.ui.movieDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -13,7 +12,7 @@ import com.example.movienight.databinding.MovieDetailsFragmentBinding
 import com.example.movienight.databinding.MovieRatingDialogBinding
 import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
 import com.example.movienight.ui.base.BaseFragment
-import com.example.movienight.ui.base.Constants
+import com.example.movienight.utilities.Constants
 
 
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {

@@ -1,13 +1,8 @@
-package com.example.movienight.ui
+package com.example.movienight.ui.main
 
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.example.movienight.R
-import com.example.movienight.ui.movieDetails.MovieDetailsFragment
-import com.example.movienight.ui.popularMovies.PopularMoviesFragment
 import com.example.movienight.ui.base.BaseActivity
-import com.example.movienight.ui.base.Constants
 
 class MainActivity : BaseActivity<MainViewModel>() {
 

@@ -3,7 +3,7 @@ package com.example.movienight.ui.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import android.os.Handler;
-import com.example.movienight.repository.SplashActivityRepo
+import com.example.movienight.data.repository.SplashActivityRepo
 import com.example.movienight.ui.base.BaseViewModel
 
 class SplashViewModel() : BaseViewModel<SplashActivityRepo>() {

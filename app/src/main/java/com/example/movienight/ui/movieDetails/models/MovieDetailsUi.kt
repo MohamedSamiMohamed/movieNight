@@ -1,8 +1,7 @@
 package com.example.movienight.ui.movieDetails.models
 
-import com.example.movienight.models.movieDetails.Genre
-import com.example.movienight.models.movieDetails.MovieDetails
-import com.example.movienight.models.movieDetails.SpokenLanguage
+import com.example.movienight.models.respnseModels.movieDetails.MovieDetails
+import com.example.movienight.models.respnseModels.movieDetails.SpokenLanguage
 
 class MovieDetailsUi {
     var dataVisibility:Boolean=false

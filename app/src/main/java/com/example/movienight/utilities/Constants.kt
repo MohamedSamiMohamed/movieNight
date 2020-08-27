@@ -1,4 +1,4 @@
-package com.example.movienight.ui.base
+package com.example.movienight.utilities
 
 object Constants {
     const val API_KEY = "11fab629496b64e02580a61604b7a093"

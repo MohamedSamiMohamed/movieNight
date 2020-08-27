@@ -38,9 +38,7 @@ class PopularMoviesAdapter(private val clickListener: OnItemClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = MovieItemBinding.inflate(layoutInflater)
-        return MoviesViewHolder(binding)
+        return MoviesViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun getItemCount(): Int {

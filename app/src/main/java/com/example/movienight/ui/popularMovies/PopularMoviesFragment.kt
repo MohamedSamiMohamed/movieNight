@@ -4,20 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.R
 import com.example.movienight.databinding.PopularMoviesFragmentBinding
 import com.example.movienight.ui.base.BaseFragment
-import com.example.movienight.ui.MainActivity
-import com.example.movienight.ui.movieDetails.MovieDetailsFragment
 import com.example.movienight.ui.popularMovies.adapter.PopularMoviesAdapter
-import com.example.movienight.ui.base.Constants
-import com.example.movienight.ui.movieDetails.MovieDetailsFragmentArgs
-import kotlinx.android.synthetic.main.popular_movies_fragment.*
+import com.example.movienight.utilities.Constants
 
 class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
     PopularMoviesAdapter.OnItemClickListener {

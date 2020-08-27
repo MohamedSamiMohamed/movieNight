@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.movienight.R
-import com.example.movienight.ui.MainActivity
+import com.example.movienight.ui.main.MainActivity
 import com.example.movienight.ui.base.BaseActivity
 
 class SplashActivity : BaseActivity<SplashViewModel>() {

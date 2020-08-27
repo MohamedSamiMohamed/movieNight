@@ -1,6 +1,6 @@
-package com.example.movienight.repository
+package com.example.movienight.network
 
-import com.example.movienight.ui.base.Constants
+import com.example.movienight.utilities.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
