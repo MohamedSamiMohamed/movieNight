@@ -11,4 +11,7 @@
     <string name="adult">watching under parents supervision!</string>
     <string name="family">family movie</string>
     <string name="default_image">jorgjEk6a0bed6jdR5wu4S6ZvRm.jpg</string>
+    <string name="rate_this_movie">Rate this movie</string>
+    <string name="movie_rate_hint">Rate this movie from 0.5 to 10.0</string>
+    <string name="submit_rating">submit rating</string>
 </resources>
