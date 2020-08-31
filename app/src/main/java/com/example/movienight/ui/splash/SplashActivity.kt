@@ -6,8 +6,10 @@ import androidx.lifecycle.Observer
 import com.example.movienight.R
 import com.example.movienight.ui.main.MainActivity
 import com.example.movienight.ui.base.BaseActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashActivity : BaseActivity<SplashViewModel>() {
+    private val splashViewModel:SplashViewModel by viewModel()
     override fun layoutID(): Int {
         return R.layout.activity_splash_screen
     }
@@ -26,9 +28,7 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
         })
     }
 
-    override fun getViewModel(): SplashViewModel {
-        return SplashViewModel()
-    }
+    override fun getViewModel(): SplashViewModel = splashViewModel
 
 }
 

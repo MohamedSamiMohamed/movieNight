@@ -8,7 +8,7 @@ import com.example.movienight.ui.base.BaseViewModel
 import com.example.movienight.utilities.Constants
 
 
-class MovieDetailsViewModel() : BaseViewModel<MovieDetailsRepo>() {
+class MovieDetailsViewModel(movieDetailsRepo: MovieDetailsRepo) : BaseViewModel<MovieDetailsRepo>(movieDetailsRepo) {
 
     var movieID: Int? = null
     lateinit var movieDetailsUI: LiveData<MovieDetailsUi>
@@ -19,7 +19,7 @@ class MovieDetailsViewModel() : BaseViewModel<MovieDetailsRepo>() {
 
     fun requestMovieDetails() {
         isLoading.value = true
-        movieDetailsUI = Transformations.switchMap(mRepo.requestMovieDetails(movieID!!)) {
+        movieDetailsUI = Transformations.switchMap(repo.requestMovieDetails(movieID!!)) {
             isLoading.value = false
             MutableLiveData(MovieDetailsUi.convertToUiModel(it))
         }
@@ -36,7 +36,7 @@ class MovieDetailsViewModel() : BaseViewModel<MovieDetailsRepo>() {
                     MovieRatingData(
                         rate
                     )
-                successRating = Transformations.map(mRepo.rateMovie(movieID!!, ratingBody)) {
+                successRating = Transformations.map(repo.rateMovie(movieID!!, ratingBody)) {
                     isLoading.value = false
                     (it)
                 }
@@ -56,9 +56,6 @@ class MovieDetailsViewModel() : BaseViewModel<MovieDetailsRepo>() {
     }
 
 
-    override fun getRepo(): MovieDetailsRepo {
-        return MovieDetailsRepo()
-    }
 }
 
 

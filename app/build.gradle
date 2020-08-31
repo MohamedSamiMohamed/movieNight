@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'koin'
 
 android {
     compileSdkVersion 29
@@ -36,6 +37,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0'
     def lifecycle_version = "2.2.0"
     def nav_version = "2.3.0"
+    def koin_version= "2.1.6"
+
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -73,5 +76,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
     implementation 'com.google.android.material:material:1.2.0'
 
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-android-scope:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
 }

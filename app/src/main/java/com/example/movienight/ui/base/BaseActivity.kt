@@ -7,7 +7,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.example.movienight.R
+import com.example.movienight.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 abstract class BaseActivity<T : BaseViewModel<*>> : AppCompatActivity() {
 
@@ -27,10 +29,11 @@ abstract class BaseActivity<T : BaseViewModel<*>> : AppCompatActivity() {
         mViewModel.isLoading.observe(this, Observer {
             showLoadingDialog(it)
         })
-        mViewModel.mRepo.requestErrorMessage.observe(this, Observer {
+        mViewModel.repo.requestErrorMessage.observe(this, Observer {
             showLoadingDialog(false)
             showToast(it)
         })
+
     }
 
     private fun showToast(errMessage: String) {

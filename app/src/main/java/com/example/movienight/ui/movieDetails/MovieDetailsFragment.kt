@@ -8,20 +8,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.movienight.R
+import com.example.movienight.data.repository.MovieDetailsRepo
 import com.example.movienight.databinding.MovieDetailsFragmentBinding
 import com.example.movienight.databinding.MovieRatingDialogBinding
-import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
 import com.example.movienight.ui.base.BaseFragment
+import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
+import com.example.movienight.ui.popularMovies.PopularMoviesViewModel
 import com.example.movienight.utilities.Constants
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
+class MovieDetailsFragment() :
+    BaseFragment<MovieDetailsViewModel>() {
 
     companion object {
         fun newInstance() =
             MovieDetailsFragment()
     }
-
+    private val movieDetailsViewModel:MovieDetailsViewModel by viewModel()
     lateinit var rateDialog: MaterialDialog
     private var movieID: Int? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,9 +48,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
         return R.layout.movie_details_fragment
     }
 
-    override fun getViewModel(): MovieDetailsViewModel {
-        return MovieDetailsViewModel()
-    }
+    override fun getViewModel(): MovieDetailsViewModel = movieDetailsViewModel
 
     fun rateMovieDialog() {
         val bindingRating: MovieRatingDialogBinding = DataBindingUtil.inflate(

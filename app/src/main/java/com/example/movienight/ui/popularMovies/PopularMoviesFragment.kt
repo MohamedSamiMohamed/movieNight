@@ -8,27 +8,28 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.movienight.R
+import com.example.movienight.data.repository.PopularMoviesRepo
 import com.example.movienight.databinding.PopularMoviesFragmentBinding
 import com.example.movienight.ui.base.BaseFragment
 import com.example.movienight.ui.popularMovies.adapter.PopularMoviesAdapter
 import com.example.movienight.utilities.Constants
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
+class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
     PopularMoviesAdapter.OnItemClickListener {
-
     companion object {
         fun newInstance() =
             PopularMoviesFragment()
     }
-
+    private val popularMoviesViewModel:PopularMoviesViewModel by viewModel()
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val binding: PopularMoviesFragmentBinding =
             DataBindingUtil.setContentView(requireActivity(), R.layout.popular_movies_fragment)
-
         navController = Navigation.findNavController(view)
         popularMoviesAdapter =
             PopularMoviesAdapter(this)
@@ -50,6 +51,6 @@ class PopularMoviesFragment : BaseFragment<PopularMoviesViewModel>(),
         return R.layout.popular_movies_fragment
     }
 
-    override fun getViewModel(): PopularMoviesViewModel = PopularMoviesViewModel()
+    override fun getViewModel(): PopularMoviesViewModel = popularMoviesViewModel
 
 }

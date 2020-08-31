@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.example.movienight.data.repository.SplashActivityRepo
 import com.example.movienight.ui.base.BaseViewModel
 
-class SplashViewModel() : BaseViewModel<SplashActivityRepo>() {
+class SplashViewModel(splashActivityRepo: SplashActivityRepo) : BaseViewModel<SplashActivityRepo>(splashActivityRepo) {
     val timeOut = MutableLiveData<Boolean>(false)
 
     fun startDelay() {
@@ -20,8 +20,5 @@ class SplashViewModel() : BaseViewModel<SplashActivityRepo>() {
         return timeOut
     }
 
-    override fun getRepo(): SplashActivityRepo {
-        return SplashActivityRepo()
-    }
 
 }

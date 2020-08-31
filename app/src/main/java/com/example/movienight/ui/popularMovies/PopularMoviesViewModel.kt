@@ -6,12 +6,12 @@ import com.example.movienight.ui.popularMovies.model.PopularMovieUi
 import com.example.movienight.ui.base.BaseViewModel
 
 
-class PopularMoviesViewModel : BaseViewModel<PopularMoviesRepo>() {
+class PopularMoviesViewModel(private val popularMoviesRepo: PopularMoviesRepo) : BaseViewModel<PopularMoviesRepo>(popularMoviesRepo) {
     var movieListUI: LiveData<List<PopularMovieUi>> = MutableLiveData()
 
     fun requestMovies() {
         isLoading.value = true
-        movieListUI = Transformations.switchMap(mRepo.requestMovies()) {
+        movieListUI = Transformations.switchMap(repo.requestMovies()) {
             isLoading.value = false
             MutableLiveData(it.map {
                 PopularMovieUi.convertToUiModel(it)
@@ -21,7 +21,4 @@ class PopularMoviesViewModel : BaseViewModel<PopularMoviesRepo>() {
     }
 
 
-    override fun getRepo(): PopularMoviesRepo {
-        return PopularMoviesRepo()
-    }
 }
