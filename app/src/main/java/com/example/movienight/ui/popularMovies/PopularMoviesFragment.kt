@@ -34,6 +34,9 @@ class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
         popularMoviesAdapter =
             PopularMoviesAdapter(this)
         binding.adapter = popularMoviesAdapter
+        binding.chatButton.setOnClickListener {
+            onChatClick()
+        }
         mViewModel.requestMovies()
         mViewModel.movieListUI.observe(viewLifecycleOwner,
             Observer {
@@ -45,6 +48,10 @@ class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
     override fun onItemClick(position: Int) {
         val args = bundleOf(Constants.MOVIE_ID to mViewModel.movieListUI.value?.get(position)?.id)
         navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment, args)
+    }
+
+     private fun onChatClick(){
+        navController.navigate(R.id.action_popularMoviesFragment_to_chatRoomFragment)
     }
 
     override fun layoutID(): Int {

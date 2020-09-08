@@ -4,29 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="adapter"
             type="com.example.movienight.ui.popularMovies.adapter.PopularMoviesAdapter" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         tools:context=".ui.popularMovies.PopularMoviesFragment">
 
+        <Button
+            android:id="@+id/chat_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_button_white"
+            android:text="@string/go_to_chat_room"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movie_list_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
             android:orientation="vertical"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_button"
             app:setAdapter="@{adapter}"
             app:spanCount="1"
             tools:listitem="@layout/movie_item" />
-
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

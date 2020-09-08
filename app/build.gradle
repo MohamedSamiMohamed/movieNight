@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'koin'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -16,6 +16,8 @@ android {
         applicationId "com.example.movienight"
         minSdkVersion 19
         targetSdkVersion 29
+        multiDexEnabled true
+
         versionCode 1
         versionName "1.0"
 
@@ -80,5 +82,12 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-scope:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.firebaseui:firebase-ui-auth:6.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-database:19.4.0'
 
 }

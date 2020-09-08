@@ -14,4 +14,9 @@
     <string name="rate_this_movie">Rate this movie</string>
     <string name="movie_rate_hint">Rate this movie from 0.5 to 10.0</string>
     <string name="submit_rating">submit rating</string>
+    <string name="go_to_chat_room">Go to chat room</string>
+    <string name="message">Message</string>
+    <string name="user_name">user name</string>
+    <string name="sned">sned</string>
+    <string name="logout">Logout</string>
 </resources>

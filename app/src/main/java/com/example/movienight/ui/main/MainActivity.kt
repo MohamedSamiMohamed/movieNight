@@ -15,5 +15,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
         super.onCreate(savedInstanceState)
     }
 
+
     override fun getViewModel(): MainViewModel = mainViewModel
 }

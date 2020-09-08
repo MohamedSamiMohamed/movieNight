@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "87317852968",
+    "firebase_url": "https://movienightchat.firebaseio.com",
+    "project_id": "movienightchat",
+    "storage_bucket": "movienightchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87317852968:android:d4ce58f3f28d02c539561d",
+        "android_client_info": {
+          "package_name": "com.example.movienight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87317852968-raps6ki1bc2jscd56urfi9ab1oc0c2ob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.movienight",
+            "certificate_hash": "b5267481f9b854f4666e385c20fa99ccfb15e51b"
+          }
+        },
+        {
+          "client_id": "87317852968-jarmg5evckdgko820k6ekqhi1rc1rt6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0IZixcwe9bkPlISm0A33DmfdWDDIwbbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87317852968-jarmg5evckdgko820k6ekqhi1rc1rt6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
