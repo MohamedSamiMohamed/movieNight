@@ -18,7 +18,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.OnItemClickListener {
+class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(), ChatUsersAdapter.OnItemClickListener {
     private lateinit var mFirebaseAuth: FirebaseAuth
     private lateinit var chatUsersAdapter: ChatUsersAdapter
     private val chatUsersViewModel: ChatUsersViewModel by viewModel()
@@ -28,17 +28,17 @@ class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.On
         AuthUI.IdpConfig.GoogleBuilder().build()
     )
     private lateinit var authListener: FirebaseAuth.AuthStateListener
-    private lateinit var myID:String
-    private lateinit var myName:String
+    private lateinit var myID: String
+    private lateinit var myName: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        chatUsersAdapter= ChatUsersAdapter(this)
+        chatUsersAdapter = ChatUsersAdapter(this)
         val binding: ActivityChatUsersBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_chat_users)
-        binding.signOut.setOnClickListener{
+        binding.signOut.setOnClickListener {
             signOut()
         }
-        binding.adapter=chatUsersAdapter
+        binding.adapter = chatUsersAdapter
         authListener = object : FirebaseAuth.AuthStateListener {
             override fun onAuthStateChanged(p0: FirebaseAuth) {
                 val user = p0.currentUser
@@ -61,8 +61,10 @@ class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.On
         mFirebaseAuth = FirebaseAuth.getInstance()
 
         mViewModel.chatUsers.observe(this, Observer {
-            chatUsersAdapter.usersList.add(it)
-            chatUsersAdapter.notifyDataSetChanged()
+            if (it.uid != myID) {
+                chatUsersAdapter.usersList.add(it)
+                chatUsersAdapter.notifyDataSetChanged()
+            }
         })
     }
 
@@ -75,7 +77,11 @@ class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.On
                 signIn(user!!)
                 FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
                     if (it.isSuccessful) {
-                        mViewModel.writeNewUser(user.uid, user.displayName.toString(), it.result!!.token)
+                        mViewModel.writeNewUser(
+                            user.uid,
+                            user.displayName.toString(),
+                            it.result!!.token
+                        )
                     }
                 }
             } else {
@@ -94,8 +100,8 @@ class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.On
     }
 
     private fun signIn(user: FirebaseUser) {
-        myID=user.uid
-        myName=user.displayName.toString()
+        myID = user.uid
+        myName = user.displayName.toString()
         mViewModel.getUsers()
     }
 
@@ -123,8 +129,10 @@ class ChatUsersActivity : BaseActivity<ChatUsersViewModel>(),ChatUsersAdapter.On
     }
 
     override fun onItemClick(position: Int) {
-        val chatRoomFragment=ChatRoomFragment(myID
-            ,chatUsersAdapter.usersList[position].uid!!,myName)
+        val chatRoomFragment = ChatRoomFragment(
+            myID
+            , chatUsersAdapter.usersList[position].uid!!, myName
+        )
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, chatRoomFragment).commit()
     }
