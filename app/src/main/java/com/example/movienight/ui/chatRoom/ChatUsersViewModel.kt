@@ -16,8 +16,8 @@ class ChatUsersViewModel(chatUsersRepo: ChatUsersRepo) :
     private var userDataListener: ChildEventListener? = null
     val chatUsers=MutableLiveData<User>()
 
-    fun writeNewUser(uID: String, name: String) {
-        val user = User(uID, name)
+    fun writeNewUser(uID: String, name: String, token: String) {
+        val user = User(uID, name,token)
         usersDatabase.child(uID).setValue(user)
     }
 

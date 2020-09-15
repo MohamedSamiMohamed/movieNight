@@ -23,7 +23,7 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     lateinit var id: String
     lateinit var userName: String
     lateinit var userID: String
-    lateinit var notificationBody:String
+    lateinit var notificationBody: String
     var message = MutableLiveData<String>()
     var chatData = MutableLiveData<ChatMessageData>()
     var isOnline = MutableLiveData<Boolean>()
@@ -41,22 +41,13 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     }
 
     fun setMyState(state: Boolean) {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
-            if (it.isSuccessful) {
-                val userInRoom =
-                    UserInRoom(
-                        id,
-                        state,
-                        it.result!!.token
-                    )
-                databaseRef.child(id).setValue(userInRoom)
-            }
-        }
+        val userInRoom = UserInRoom(id, state)
+        databaseRef.child(id).setValue(userInRoom)
     }
 
 
     fun sendMessage() {
-        notificationBody= message.value.toString()
+        notificationBody = message.value.toString()
         chatMessageData =
             ChatMessageData(
                 message.value,
@@ -67,21 +58,21 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     }
 
     fun sendNotification() {
-            val notification=Notification("new message from $userName" ,notificationBody)
-            val notificationBody = NotificationBody(fcmToken.value,"high",notification )
-            val request = RetrofitClient.getAPI(NotificationApiEndPoints::class.java)
-                .sendNotification(Constants.FIREBASE_URL,notificationBody)
-            request.enqueue(object : Callback<Void> {
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+        val notification = Notification("new message from $userName", notificationBody)
+        val notificationBody = NotificationBody(fcmToken.value, "high", notification)
+        val request = RetrofitClient.getAPI(NotificationApiEndPoints::class.java)
+            .sendNotification(Constants.FIREBASE_URL, notificationBody)
+        request.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
 
-                }
+            }
 
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    Log.d("sending notification", "...........")
-                }
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                Log.d("sending notification", "...........")
+            }
 
-            })
-        }
+        })
+    }
 
 
     fun getToken() {
@@ -94,11 +85,11 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
                 fcmToken.value = snapshot.value as String
             }
         }
-        databaseRef.child(userID).child("fcmToken").addValueEventListener(userTokenListener)
+        firebaseDataBase.reference.child("users").child(userID).child("fcmToken").addValueEventListener(userTokenListener)
 
     }
 
-     fun checkIsOnline() {
+    fun checkIsOnline() {
         val isOnlineListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
