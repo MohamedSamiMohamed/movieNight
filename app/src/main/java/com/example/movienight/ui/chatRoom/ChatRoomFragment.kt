@@ -58,9 +58,15 @@ class ChatRoomFragment(val myID: String, val userID: String, val myName: String)
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onResume() {
+        super.onResume()
+        mViewModel.setMyState(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
         mViewModel.setMyState(false)
+
     }
 
     override fun getViewModel(): ChatRoomViewModel = chatRoomViewModel
