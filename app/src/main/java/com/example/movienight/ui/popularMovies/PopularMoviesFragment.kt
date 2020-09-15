@@ -51,7 +51,7 @@ class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
     }
 
      private fun onChatClick(){
-        navController.navigate(R.id.action_popularMoviesFragment_to_chatRoomActivity)
+        navController.navigate(R.id.action_popularMoviesFragment_to_chatUsersActivity)
     }
 
     override fun layoutID(): Int {

@@ -3,7 +3,7 @@ package com.example.movienight.ui.chatRoom.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movienight.data.models.requestModels.ChatMessageData
+import com.example.movienight.data.firebaseModels.ChatMessageData
 import com.example.movienight.databinding.MessageItemBinding
 
 

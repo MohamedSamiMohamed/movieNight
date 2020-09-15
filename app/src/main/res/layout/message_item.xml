@@ -5,7 +5,7 @@
     <data>
         <variable
             name="chatMessage"
-            type="com.example.movienight.data.models.requestModels.ChatMessageData" />
+            type="com.example.movienight.data.firebaseModels.ChatMessageData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

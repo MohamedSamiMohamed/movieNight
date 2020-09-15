@@ -14,8 +14,8 @@
             android:id="@+id/action_popularMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
         <action
-            android:id="@+id/action_popularMoviesFragment_to_chatRoomActivity"
-            app:destination="@id/chatRoomActivity" />
+            android:id="@+id/action_popularMoviesFragment_to_chatUsersActivity"
+            app:destination="@id/chatUsersActivity" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -27,7 +27,7 @@
             app:argType="integer" />
     </fragment>
     <activity
-        android:id="@+id/chatRoomActivity"
-        android:name="com.example.movienight.ui.chatRoom.ChatRoomActivity"
-        android:label="ChatRoomActivity" />
+        android:id="@+id/chatUsersActivity"
+        android:name="com.example.movienight.ui.chatRoom.ChatUsersActivity"
+        android:label="ChatUsersActivity" />
 </navigation>
