@@ -1,7 +1,11 @@
 package com.example.movienight.ui.chatRoom
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.movienight.constants.ApiConstants
+import com.example.movienight.constants.FirebaseRoutes
 import com.example.movienight.data.api.NotificationApiEndPoints
 import com.example.movienight.data.firebaseModels.ChatMessageData
 import com.example.movienight.data.firebaseModels.Notification
@@ -10,9 +14,9 @@ import com.example.movienight.data.repository.ChatRoomRepo
 import com.example.movienight.ui.base.BaseViewModel
 import com.example.movienight.data.firebaseModels.UserInRoom
 import com.example.movienight.network.RetrofitClient
-import com.example.movienight.utilities.Constants
 import com.google.firebase.database.*
-import com.google.firebase.iid.FirebaseInstanceId
+import kotlinx.coroutines.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +27,7 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     lateinit var id: String
     lateinit var userName: String
     lateinit var userID: String
-    lateinit var notificationBody: String
+    lateinit var notificationMessage: String
     var message = MutableLiveData<String>()
     var chatData = MutableLiveData<ChatMessageData>()
     var isOnline = MutableLiveData<Boolean>()
@@ -31,7 +35,7 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     private var messageListener: ChildEventListener? = null
     private lateinit var chatMessageData: ChatMessageData
     private val firebaseDataBase = FirebaseDatabase.getInstance()
-    private var databaseRef = firebaseDataBase.reference.child("rooms")
+    private var databaseRef = firebaseDataBase.reference.child(FirebaseRoutes.ROOMS)
     fun initDatabaseRef() {
         if (checkSmaller(userID, id) == userID) {
             databaseRef = databaseRef.child(userID + "_" + id)
@@ -47,33 +51,24 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
 
 
     fun sendMessage() {
-        notificationBody = message.value.toString()
+        notificationMessage = message.value.toString()
         chatMessageData =
             ChatMessageData(
                 message.value,
                 userName,
                 id
             )
-        databaseRef.child("messages").push().setValue(chatMessageData)
+        databaseRef.child(FirebaseRoutes.MESSAGES).push().setValue(chatMessageData)
     }
 
     fun sendNotification() {
-        val notification = Notification("new message from $userName", notificationBody)
+        val notification = Notification("new message from $userName", notificationMessage)
         val notificationBody = NotificationBody(fcmToken.value, "high", notification)
-        val request = RetrofitClient.getAPI(NotificationApiEndPoints::class.java)
-            .sendNotification(Constants.FIREBASE_URL, notificationBody)
-        request.enqueue(object : Callback<Void> {
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-
-            }
-
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                Log.d("sending notification", "...........")
-            }
-
-        })
+        viewModelScope.launch {
+            val response = repo.sendNotification(notificationBody)
+            Log.d("response", response.toString())
+        }
     }
-
 
     fun getToken() {
         val userTokenListener = object : ValueEventListener {
@@ -85,7 +80,8 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
                 fcmToken.value = snapshot.value as String
             }
         }
-        firebaseDataBase.reference.child("users").child(userID).child("fcmToken").addValueEventListener(userTokenListener)
+        firebaseDataBase.reference.child(FirebaseRoutes.USERS).child(userID)
+            .child(FirebaseRoutes.FCM_TOKEN).addValueEventListener(userTokenListener)
 
     }
 
@@ -99,7 +95,8 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
                 isOnline.value = snapshot.value as Boolean
             }
         }
-        databaseRef.child(userID).child("online").addValueEventListener(isOnlineListener)
+        databaseRef.child(userID).child(FirebaseRoutes.ONLINE)
+            .addValueEventListener(isOnlineListener)
     }
 
     private fun checkSmaller(id1: String, id2: String): String {
@@ -123,25 +120,19 @@ class ChatRoomViewModel(chatRoomRepo: ChatRoomRepo) : BaseViewModel<ChatRoomRepo
     }
 
     fun readMessages() {
+        isLoading.value = true
         if (messageListener == null) {
             messageListener = object : ChildEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                }
-
-                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                }
-
+                override fun onCancelled(error: DatabaseError) {}
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     chatData.value = snapshot.getValue(ChatMessageData::class.java)
                 }
 
-                override fun onChildRemoved(snapshot: DataSnapshot) {
-                }
+                override fun onChildRemoved(snapshot: DataSnapshot) {}
             }
-            databaseRef.child("messages")
+            databaseRef.child(FirebaseRoutes.MESSAGES)
                 .addChildEventListener(messageListener as ChildEventListener)
         }
     }

@@ -1,11 +1,11 @@
 package com.example.movienight.ui.movieDetails
 
 import androidx.lifecycle.*
+import com.example.movienight.R
 import com.example.movienight.models.requestModels.MovieRatingData
 import com.example.movienight.data.repository.MovieDetailsRepo
 import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
 import com.example.movienight.ui.base.BaseViewModel
-import com.example.movienight.utilities.Constants
 
 
 class MovieDetailsViewModel(movieDetailsRepo: MovieDetailsRepo) : BaseViewModel<MovieDetailsRepo>(movieDetailsRepo) {
@@ -14,7 +14,7 @@ class MovieDetailsViewModel(movieDetailsRepo: MovieDetailsRepo) : BaseViewModel<
     lateinit var movieDetailsUI: LiveData<MovieDetailsUi>
     lateinit var ratingBody: MovieRatingData
     var rateText = MutableLiveData<String>()
-    var errMessage = MutableLiveData<String>()
+    var errMessage = MutableLiveData<Int>()
     var successRating: LiveData<Boolean> = MutableLiveData<Boolean>()
 
     fun requestMovieDetails() {
@@ -41,10 +41,10 @@ class MovieDetailsViewModel(movieDetailsRepo: MovieDetailsRepo) : BaseViewModel<
                     (it)
                 }
             } else {
-                errMessage.value = Constants.ERROR_RATING
+                errMessage.value = R.string.error_rating
             }
         } else {
-            errMessage.value = Constants.ERROR_RATING
+            errMessage.value =  R.string.error_rating
         }
     }
 

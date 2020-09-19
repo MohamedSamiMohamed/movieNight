@@ -8,13 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.movienight.R
-import com.example.movienight.data.repository.MovieDetailsRepo
+import com.example.movienight.constants.KeyConstants
 import com.example.movienight.databinding.MovieDetailsFragmentBinding
 import com.example.movienight.databinding.MovieRatingDialogBinding
 import com.example.movienight.ui.base.BaseFragment
 import com.example.movienight.ui.movieDetails.models.MovieDetailsUi
-import com.example.movienight.ui.popularMovies.PopularMoviesViewModel
-import com.example.movienight.utilities.Constants
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -35,7 +33,7 @@ class MovieDetailsFragment() :
         binding.movieDetailsFragment = this
         binding.lifecycleOwner = this
         rateDialog = MaterialDialog(requireContext()).noAutoDismiss()
-        movieID = arguments?.getInt(Constants.MOVIE_ID)!!
+        movieID = arguments?.getInt(KeyConstants.MOVIE_ID)!!
         mViewModel.movieID = movieID
         mViewModel.requestMovieDetails()
         mViewModel.movieDetailsUI.observe(viewLifecycleOwner, Observer<MovieDetailsUi> {
@@ -70,7 +68,7 @@ class MovieDetailsFragment() :
         mViewModel.successRating.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) {
                 rateDialog.hide()
-                Toast.makeText(context, Constants.SUBMIT_RATING, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context!!.getString(R.string.submit_rating_msg), Toast.LENGTH_SHORT).show()
             }
         })
     }

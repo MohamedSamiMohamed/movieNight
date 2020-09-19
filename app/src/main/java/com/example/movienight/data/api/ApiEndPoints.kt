@@ -1,17 +1,17 @@
 package com.example.movienight.data.api
 
+import com.example.movienight.constants.ApiConstants
 import com.example.movienight.models.requestModels.MovieRatingData
 import com.example.movienight.models.respnseModels.movieDetails.MovieDetails
 import com.example.movienight.models.popularMovies.Movies
-import com.example.movienight.utilities.Constants
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-const val API_KEY= Constants.API_KEY
-const val SESSION_ID= Constants.SESSION_ID
+const val API_KEY= ApiConstants.API_KEY
+const val SESSION_ID= ApiConstants.SESSION_ID
 
 interface ApiEndPoints {
     /**

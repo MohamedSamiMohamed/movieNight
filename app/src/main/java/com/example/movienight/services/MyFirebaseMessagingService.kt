@@ -1,4 +1,4 @@
-package com.example.movienight
+package com.example.movienight.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.movienight.ui.main.MainActivity
 import android.content.Context
+import com.example.movienight.R
 import com.example.movienight.data.firebaseModels.Notification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

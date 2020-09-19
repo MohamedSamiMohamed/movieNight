@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.chatRoom.ChatUsersActivity"/>
+        <activity android:name=".ui.chatRoom.ChatActivity"/>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:noHistory="true">
@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".ui.main.MainActivity" />
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".services.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -11,4 +11,5 @@ val repoModule: Module = module {
     factory { MainActivityRepo() }
     factory { ChatRoomRepo() }
     factory { ChatUsersRepo() }
+    factory { ChatRepo() }
 }

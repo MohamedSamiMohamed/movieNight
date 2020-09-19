@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movienight.R
+import com.example.movienight.constants.ApiConstants
 
 @BindingAdapter("app:setAdapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
@@ -16,7 +18,7 @@ fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
 fun setImage(view: ImageView, url: String?) {
     if (url != null) {
         Glide.with(view.context)
-            .load("https://image.tmdb.org/t/p/original$url")
+            .load("${ApiConstants.IMAGE_URL}$url")
             .into(view)
     }
 }
@@ -35,9 +37,9 @@ fun setGenres(view: TextView, genres: List<String>?) {
 }
 
 @BindingAdapter("app:showInputTextError")
-fun showError(view: EditText, errMessage: String?) {
+fun showError(view: EditText, errMessage: Int?) {
     if (errMessage != null) {
-        view.error = errMessage
+        view.error = view.context.getString(errMessage)
         view.requestFocus()
     }
 }

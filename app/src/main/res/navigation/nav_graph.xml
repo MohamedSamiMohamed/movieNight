@@ -28,6 +28,6 @@
     </fragment>
     <activity
         android:id="@+id/chatUsersActivity"
-        android:name="com.example.movienight.ui.chatRoom.ChatUsersActivity"
+        android:name="com.example.movienight.ui.chatRoom.ChatActivity"
         android:label="ChatUsersActivity" />
 </navigation>

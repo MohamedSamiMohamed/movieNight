@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.movienight.data.di.repoModule
 import com.example.movienight.ui.chatRoom.di.ChatRoomViewModelModule
 import com.example.movienight.ui.chatRoom.di.ChatUsersViewModelModule
+import com.example.movienight.ui.chatRoom.di.ChatViewModelModule
 import com.example.movienight.ui.main.di.mainViewModelModule
 import com.example.movienight.ui.movieDetails.di.movieDetailsViewModelModule
 import com.example.movienight.ui.popularMovies.di.popularMoviesViewModelModule
@@ -23,7 +24,8 @@ class MyApp : Application() {
                 splashViewModelModule,
                 mainViewModelModule,
                 ChatRoomViewModelModule,
-                ChatUsersViewModelModule
+                ChatUsersViewModelModule,
+                ChatViewModelModule
             )
             modules(modules)
         }

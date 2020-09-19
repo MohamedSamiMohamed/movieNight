@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/chat_navigation"
+    app:startDestination="@id/chatUsersFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <fragment
+        android:id="@+id/chatUsersFragment"
+        android:name="com.example.movienight.ui.chatRoom.ChatUsersFragment"
+        android:label="ChatUsersFragment"
+        tools:layout="@layout/chat_users_fragment"
+        >
+        <action
+            android:id="@+id/action_chatUsersFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="com.example.movienight.ui.chatRoom.ChatRoomFragment"
+        android:label="ChatRoomFragment"
+        tools:layout="@layout/chat_room_fragment"
+        >
+    <argument
+        android:name="my_id"
+        app:argType="string" />
+    <argument
+        android:name="user_id"
+        app:argType="string" />
+    <argument
+        android:name="my_name"
+        app:argType="string" />
+        </fragment>
+</navigation>

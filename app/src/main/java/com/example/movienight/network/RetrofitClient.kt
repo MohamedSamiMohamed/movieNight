@@ -1,7 +1,6 @@
 package com.example.movienight.network
 
-import com.example.movienight.data.api.NotificationApiEndPoints
-import com.example.movienight.utilities.Constants
+import com.example.movienight.constants.ApiConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private var BASE_URL = Constants.BASE_URL
+    private var BASE_URL = ApiConstants.BASE_URL
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }

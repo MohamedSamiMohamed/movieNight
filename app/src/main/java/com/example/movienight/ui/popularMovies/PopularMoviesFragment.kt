@@ -8,11 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.movienight.R
-import com.example.movienight.data.repository.PopularMoviesRepo
+import com.example.movienight.constants.KeyConstants
 import com.example.movienight.databinding.PopularMoviesFragmentBinding
 import com.example.movienight.ui.base.BaseFragment
 import com.example.movienight.ui.popularMovies.adapter.PopularMoviesAdapter
-import com.example.movienight.utilities.Constants
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
@@ -46,7 +45,7 @@ class PopularMoviesFragment() : BaseFragment<PopularMoviesViewModel>(),
     }
 
     override fun onItemClick(position: Int) {
-        val args = bundleOf(Constants.MOVIE_ID to mViewModel.movieListUI.value?.get(position)?.id)
+        val args = bundleOf(KeyConstants.MOVIE_ID to mViewModel.movieListUI.value?.get(position)?.id)
         navController.navigate(R.id.action_popularMoviesFragment_to_movieDetailsFragment, args)
     }
 
